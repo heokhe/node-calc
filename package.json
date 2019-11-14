@@ -1,6 +1,6 @@
 {
   "name": "@hkh12/node-calc",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple calculator in terminal",
   "main": "index.js",
   "keywords": [
