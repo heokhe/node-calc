@@ -12,7 +12,7 @@ function evalExpression(expr) {
 
     const prev = tokens[i - 1],
       next = tokens[i + 1],
-      value = token.perform(prev.numericValue, next.numericValue);
+      value = token.perform(prev.value, next.value);
     tokens.splice(i - 1, 3, new Token(value.toString()));
     i = 0;
   }
@@ -22,14 +22,14 @@ function evalExpression(expr) {
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
     if (token.isOperator) {
-      prev = operator ? operator.perform(prev, x.numericValue) : x.numericValue;
+      prev = operator ? operator.perform(prev, x.value) : x.value;
       operator = token;
       x = undefined;
     } else {
       x = token;
     }
   }
-  return operator ? operator.perform(prev, x.numericValue) : x.numericValue;
+  return operator ? operator.perform(prev, x.value) : x.value;
 }
 
 module.exports = evalExpression;

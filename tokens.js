@@ -4,7 +4,7 @@ class Token {
    */
   constructor(string) {
     this._rawValue = string;
-    this.numericValue = Number.parseInt(string);
+    this.value = Number.parseFloat(string);
     this.isOperator = [...'-+*/'].includes(string);
     this.hasHighPriority = [...'/*'].includes(string);
   }
