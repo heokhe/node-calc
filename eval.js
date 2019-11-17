@@ -5,6 +5,7 @@ const tokenize = require('./tokenize');
 function evalExpression(expr) {
   expr = expr
     .replace(/\((.+)\)/g, (_, innerValue) => evalExpression(innerValue));
+
   const tokens = tokenize(expr);
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];

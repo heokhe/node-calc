@@ -17,8 +17,7 @@ module.exports = function tokenize(expr) {
         throw new Error('unexpected whitespace');
       } else continue;
     }
-    if (/\d/.test(c)) x += c;
-    else if (x && c === '.') x += '.';
+    if (/[0-9.]/.test(c)) x += c;
     else if ([...'-+*/'].includes(c)) {
       if (!x) {
         if (c === '-') neg = !neg;
