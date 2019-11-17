@@ -6,7 +6,6 @@ class Token {
     this._rawValue = string;
     this.value = Number.parseFloat(string);
     this.isOperator = [...'-+*/'].includes(string);
-    this.hasHighPriority = [...'/*'].includes(string);
   }
 }
 
@@ -14,6 +13,7 @@ class Operator extends Token {
   constructor(string) {
     super(string);
     this.type = this._rawValue;
+    this.hasHighPriority = [...'/*'].includes(string);
   }
 
   perform(a, b) {
