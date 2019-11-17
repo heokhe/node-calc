@@ -5,6 +5,7 @@ const evalExpression = require('./eval');
 
 console.log('Welcome to Node.js calculator!');
 const rl = readline.createInterface(process.stdin, process.stdout);
+rl.addListener('close', () => console.log('\nBye Bye!'));
 function askForAnExpression() {
   rl.question(blueBright('> '), expr => {
     if (expr.trim()) {
