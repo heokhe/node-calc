@@ -18,7 +18,7 @@ module.exports = function tokenize(expr) {
       } else continue;
     }
     if (/[0-9.]/.test(c)) x += c;
-    else if ([...'-+*/'].includes(c)) {
+    else if ([...'^-+*/'].includes(c)) {
       if (!x) {
         if (c === '-') neg = !neg;
         else if (c !== '+') throw new Error(`unexpected "${c}"`);

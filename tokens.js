@@ -5,7 +5,7 @@ class Token {
   constructor(string) {
     this._rawValue = string;
     this.value = Number.parseFloat(string);
-    this.isOperator = [...'-+*/'].includes(string);
+    this.isOperator = [...'-+*/^'].includes(string);
   }
 }
 
@@ -13,7 +13,9 @@ class Operator extends Token {
   constructor(string) {
     super(string);
     this.type = this._rawValue;
-    this.hasHighPriority = [...'/*'].includes(string);
+    this.priority = string === '^' ? 3
+      : [...'/*'].includes(string) ? 2
+        : 1;
   }
 
   perform(a, b) {
@@ -26,6 +28,8 @@ class Operator extends Token {
         return a * b;
       case '/':
         return a / b;
+      case '^':
+        return a ** b;
       default:
         return NaN;
     }
