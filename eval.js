@@ -12,13 +12,13 @@ function evalExpression(expr) {
   for (let p = MAX_PRIORITY; p >= 2; p--) {
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i];
-      if (!token.isOperator || token.priority !== p) continue;
-
-      const prev = tokens[i - 1],
-        next = tokens[i + 1],
-        value = token.perform(prev.value, next.value);
-      tokens.splice(i - 1, 3, new Token(value.toString()));
-      i = 0;
+      if (token.isOperator && token.priority === p) {
+        const prev = tokens[i - 1],
+          next = tokens[i + 1],
+          value = token.perform(prev.value, next.value);
+        tokens.splice(i - 1, 3, new Token(value.toString()));
+        i = 0;
+      }
     }
   }
   let x,
