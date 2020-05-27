@@ -1,12 +1,16 @@
 const { Token } = require('./tokens');
 const tokenize = require('./tokenize');
+const solveParenthesis = require('./parenthesis');
 
 const MAX_PRIORITY = 3;
 
 /** @param {string} expr */
 function evalExpression(expr) {
-  expr = expr
-    .replace(/\((.+)\)/g, (_, innerValue) => evalExpression(innerValue));
+  if (!expr.trim()) {
+    throw new Error('no expression');
+  }
+
+  expr = solveParenthesis(expr, evalExpression);
 
   const tokens = tokenize(expr);
   for (let p = MAX_PRIORITY; p >= 2; p--) {
