@@ -8,7 +8,7 @@
     "cli"
   ],
   "bin": {
-    "node-calc": "index.js"
+    "node-calc": "cli.js"
   },
   "repository": {
     "type": "git",
