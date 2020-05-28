@@ -1,18 +1,23 @@
-const { Token } = require('./tokens');
+const { Token, Parenthesis } = require('./tokens');
 const tokenize = require('./tokenize');
-const solveParenthesis = require('./parenthesis');
 
 const MAX_PRIORITY = 3;
 
 /** @param {string} expr */
 function evalExpression(expr) {
-  if (!expr.trim()) {
-    throw new Error('no expression');
-  }
-
-  expr = solveParenthesis(expr, evalExpression);
+  if (!expr.trim()) throw new Error('no expression');
 
   const tokens = tokenize(expr);
+
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
+    if (token instanceof Parenthesis) {
+      let realInnerValue = evalExpression(token.innerValue);
+      if (token.isNegative) realInnerValue *= -1;
+      tokens[i] = new Token(realInnerValue.toString());
+    }
+  }
+
   for (let p = MAX_PRIORITY; p >= 2; p--) {
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i];

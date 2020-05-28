@@ -1,11 +1,13 @@
 class Token {
-  /**
-   * @param {string} string
-   */
-  constructor(string) {
+  /** @param {string} string */
+  constructor(string, isNegative = false) {
     this._rawValue = string;
-    this.value = Number.parseFloat(string);
     this.isOperator = [...'-+*/^'].includes(string);
+    this.isNegative = isNegative;
+  }
+
+  get value() {
+    return (this.isNegative ? -1 : 1) * Number.parseFloat(this._rawValue);
   }
 }
 
@@ -36,4 +38,11 @@ class Operator extends Token {
   }
 }
 
-module.exports = { Token, Operator };
+class Parenthesis extends Token {
+  constructor(string, isNegative) {
+    super(string, isNegative);
+    this.innerValue = string.slice(1, -1);
+  }
+}
+
+module.exports = { Token, Operator, Parenthesis };
