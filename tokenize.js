@@ -26,13 +26,15 @@ module.exports = function tokenize(expr) {
     if (c === '(') {
       open = true;
       n++;
-      if (x) {
-        tokens.push(new Token(x, neg))
-        tokens.push(new Operator('*'));
-        x = '';
-        neg = false;
+      if (n === 1) {
+        if (x) {
+          tokens.push(new Token(x, neg));
+          tokens.push(new Operator('*'));
+          x = '';
+          neg = false;
+        }
+        continue;
       }
-      if (n === 1) continue;
     } else if (c === ')') {
       n--;
       if (n === 0) {
