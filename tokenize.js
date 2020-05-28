@@ -27,8 +27,8 @@ module.exports = function tokenize(expr) {
       open = true;
       n++;
       if (n === 1) {
-        if (x) {
-          tokens.push(new Token(x, neg));
+        if (x || tokens[tokens.length - 1] instanceof Parenthesis) {
+          if (x) tokens.push(new Token(x, neg));
           tokens.push(new Operator('*'));
           x = '';
           neg = false;
