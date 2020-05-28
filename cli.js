@@ -2,6 +2,7 @@
 const readline = require('readline');
 const { redBright, blueBright } = require('chalk');
 const evalExpression = require('./eval');
+const { version } = require('./package.json');
 
 function printExpression(expr) {
   try {
@@ -16,7 +17,7 @@ const [,, ...args] = process.argv;
 if (args.length) {
   for (const expression of args) printExpression(expression);
 } else {
-  console.log('Welcome to Node.js calculator!');
+  console.log(`Welcome to Node.js calculator! (version ${version})`);
   const rl = readline.createInterface(process.stdin, process.stdout);
   rl.addListener('close', () => console.log('\nBye Bye!'));
   const askForAnExpression = () => {
