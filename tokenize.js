@@ -41,6 +41,7 @@ module.exports = function tokenize(expr) {
         open = false;
         tokens.push(new Parenthesis(`(${x})`, neg));
         x = '';
+        if (/[0-9.]/.test(expr[i + 1])) tokens.push(new Operator('*'));
         continue;
       }
     }
@@ -63,9 +64,7 @@ module.exports = function tokenize(expr) {
       else if (c !== '+') throw new Error(`unexpected "${c}"`);
     } else throw new Error(`unexpected "${c}"`);
   }
-  if (o && !x) {
-    throw new Error(`expected an expression after operator ${o} at index`);
-  }
+  if (o && !x) throw new Error(`expected an expression after operator ${o} at index`);
   if (x) tokens.push(new Token(x, neg));
   return tokens;
 };
