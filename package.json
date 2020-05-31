@@ -17,5 +17,8 @@
   "author": "Hosein Khansari <hrk.x11@gmail.com>",
   "dependencies": {
     "chalk": "^3.0.0"
+  },
+  "devDependencies": {
+    "@hkh12/eslint-config": "^1.2.1"
   }
 }
