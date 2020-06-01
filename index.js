@@ -1,3 +1,12 @@
-const evalExpression = require('./eval');
+const { evalExpression, evalTokens } = require('./eval');
+const tokenize = require('./tokenize');
+const { Operator, Parenthesis, Token } = require('./tokens');
 
-module.exports = evalExpression;
+module.exports = {
+  evalExpression,
+  evalTokens,
+  tokenize,
+  Token,
+  Operator,
+  Parenthesis
+};

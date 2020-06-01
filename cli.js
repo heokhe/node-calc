@@ -1,7 +1,7 @@
 #!/usr/bin/node
 const readline = require('readline');
 const { redBright, blueBright } = require('chalk');
-const evalExpression = require('./eval');
+const { evalExpression } = require('./eval');
 const { version } = require('./package.json');
 
 function printExpression(expr) {

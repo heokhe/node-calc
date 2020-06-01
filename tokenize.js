@@ -5,7 +5,6 @@ module.exports = function tokenize(expr) {
   /** @type {(Token | Operator)[]} */
   const tokens = [];
   let x = '',
-    o = null,
     neg = false,
     open = false,
     n = 0;
@@ -54,17 +53,17 @@ module.exports = function tokenize(expr) {
     if (/[0-9.]/.test(c)) x += c;
     else if ([...'^-+*/'].includes(c)) {
       if (x || tokens[tokens.length - 1] instanceof Parenthesis) {
-        o = c;
         if (x) tokens.push(new Token(x, neg));
         tokens.push(new Operator(c));
         x = '';
-        o = '';
         neg = false;
       } else if (c === '-') neg = !neg;
       else if (c !== '+') throw new Error(`unexpected "${c}"`);
     } else throw new Error(`unexpected "${c}"`);
   }
-  if (o && !x) throw new Error(`expected an expression after operator ${o} at index`);
+  if (tokens[tokens.length - 1] instanceof Operator && !x) {
+    throw new Error(`expected an expression after operator ${tokens[tokens.length - 1].type} at index ${tokens.length - 1}`);
+  }
   if (x) tokens.push(new Token(x, neg));
   return tokens;
 };

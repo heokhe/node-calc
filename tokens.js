@@ -9,6 +9,10 @@ class Token {
   get value() {
     return (this.isNegative ? -1 : 1) * Number.parseFloat(this._rawValue);
   }
+
+  toString() {
+    return this.value;
+  }
 }
 
 class Operator extends Token {
@@ -36,12 +40,20 @@ class Operator extends Token {
         return NaN;
     }
   }
+
+  toString() {
+    return this.type;
+  }
 }
 
 class Parenthesis extends Token {
   constructor(string, isNegative) {
     super(string, isNegative);
     this.innerValue = string.slice(1, -1);
+  }
+
+  toString() {
+    return `${this.isNegative ? '-' : ''}(${this.innerValue})`;
   }
 }
 
