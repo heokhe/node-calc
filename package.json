@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/hkh12/node-calc#readme",
   "author": "Hosein Khansari <hrk.x11@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "chalk": "^3.0.0"
   },
