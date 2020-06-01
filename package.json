@@ -1,6 +1,6 @@
 {
   "name": "@hkh12/node-calc",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "A small library/CLI to help you parse and calculate basic math expressions.",
   "main": "index.js",
   "keywords": [
