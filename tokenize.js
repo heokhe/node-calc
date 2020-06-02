@@ -62,7 +62,7 @@ module.exports = function tokenize(expr) {
     } else throw new Error(`unexpected "${c}"`);
   }
   if (tokens[tokens.length - 1] instanceof Operator && !x) {
-    throw new Error(`expected an expression after operator ${tokens[tokens.length - 1].type} at index ${tokens.length - 1}`);
+    throw new Error(`expected an expression after operator ${tokens[tokens.length - 1].type} at index ${expr.length - 1}`);
   }
   if (x) tokens.push(new Token(x, neg));
   return tokens;
