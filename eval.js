@@ -20,7 +20,7 @@ function solvePowers(tokens) {
       const prev = tokens[i - 1],
         next = tokens[i + 1],
         value = token.perform(prev.value, next.value);
-      tokens.splice(i - 1, 3, new Token(value.toString()));
+      tokens.splice(i - 1, 3, new Token(value.toString(), next.value % 2 === 0 && prev.isNegative));
       i = tokens.length - 1;
     }
   }
