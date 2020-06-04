@@ -1,3 +1,5 @@
+const ops = require('./operators');
+
 class Token {
   /** @param {string} string */
   constructor(string, isNegative = false) {
@@ -27,13 +29,13 @@ class Operator extends Token {
   perform(a, b) {
     switch (this.type) {
       case '-':
-        return a - b;
+        return ops.sub(a, b);
       case '+':
-        return a + b;
+        return ops.add(a, b);
       case '*':
-        return a * b;
+        return ops.mul(a, b);
       case '/':
-        return a / b;
+        return ops.div(a, b);
       case '^':
         return a ** b;
       default:
