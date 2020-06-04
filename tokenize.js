@@ -61,6 +61,7 @@ module.exports = function tokenize(expr) {
       else if (c !== '+') throw new Error(`unexpected "${c}"`);
     } else throw new Error(`unexpected "${c}"`);
   }
+  if (n !== 0) throw new Error('parenthesis are not balanced');
   if (tokens[tokens.length - 1] instanceof Operator && !x) {
     throw new Error(`expected an expression after operator ${tokens[tokens.length - 1].type} at index ${expr.length - 1}`);
   }
