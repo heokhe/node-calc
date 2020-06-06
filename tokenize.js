@@ -1,4 +1,6 @@
-const { Operator, Token, Parenthesis, MathFunction } = require('./tokens');
+const {
+  Operator, Token, Parenthesis, MathFunction
+} = require('./tokens');
 
 /** @param {string} expr */
 module.exports = function tokenize(expr) {
@@ -32,7 +34,7 @@ module.exports = function tokenize(expr) {
           tokens.push(new Operator('*'));
           x = '';
           neg = false;
-        } 
+        }
         continue;
       }
     } else if (c === ')') {
@@ -42,7 +44,6 @@ module.exports = function tokenize(expr) {
         if (f) {
           tokens.push(new MathFunction(f, new Parenthesis(`(${x})`), neg));
           f = '';
-          // console.log(f, x)
         } else {
           tokens.push(new Parenthesis(`(${x})`, neg));
         }
@@ -58,20 +59,27 @@ module.exports = function tokenize(expr) {
     }
 
     if (n === 0 && /[a-z]/.test(c)) f += c;
-    else if (/[0-9.]/.test(c)) x += c;
-    else if ([...'^-+*/'].includes(c)) {
-      if (x || tokens[tokens.length - 1] instanceof Parenthesis || tokens[tokens.length - 1] instanceof MathFunction) {
+    else if (/[0-9.]/.test(c)) {
+      if (!open && f) throw new Error(`unexpected "${expr.substr(i - f.length, f.length)}"`);
+      x += c;
+    } else if ([...'^-+*/'].includes(c)) {
+      const { type: lastType } = tokens[tokens.length - 1] || {};
+      if (x || [Token.TYPES.PARENTHESIS, Token.TYPES.FUNCTION].includes(lastType)) {
         if (x) tokens.push(new Token(x, neg));
         tokens.push(new Operator(c));
         x = '';
         neg = false;
-      } else if (c === '-') neg = !neg;
-      else if (c !== '+') throw new Error(`unexpected "${c}"`);
+      } else if (c === '-') {
+        neg = !neg;
+      } else if (c === '+') {
+        throw new Error(`unexpected "${c}"`);
+      }
     } else throw new Error(`unexpected "${c}"`);
   }
   if (n !== 0) throw new Error('parenthesis are not balanced');
-  if (tokens[tokens.length - 1] instanceof Operator && !x) {
-    throw new Error(`expected an expression after operator ${tokens[tokens.length - 1].type} at index ${expr.length - 1}`);
+  const last = tokens[tokens.length - 1];
+  if (!x && last.type === Token.TYPES.OPERATOR) {
+    throw new Error(`expected an expression after operator ${last.operatorType} at index ${expr.length - 1}`);
   }
   if (x) tokens.push(new Token(x, neg));
   return tokens;
