@@ -1,13 +1,14 @@
-const { Token, Parenthesis, MathFunction } = require('./tokens');
+/* eslint-disable no-use-before-define */
+
+const { Token } = require('./tokens');
 const tokenize = require('./tokenize');
 
 function solveFunctions(tokens) {
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
-    if (token instanceof MathFunction) {
-      const argValue = evalExpression(token.arg.innerValue);
+    if (token.type === Token.TYPES.FUNCTION) {
+      const argValue = evalExpression(token.argumentParenthesis.innerValue);
       tokens[i] = new Token(token.calculate(argValue));
-			// console.log('TCL: solveFunctions -> argValue', argValue);
     }
   }
 }
@@ -15,8 +16,7 @@ function solveFunctions(tokens) {
 function solveParenthesis(tokens) {
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
-    if (token instanceof Parenthesis) {
-      // eslint-disable-next-line no-use-before-define
+    if (token.type === Token.TYPES.PARENTHESIS) {
       let innerValue = evalExpression(token.innerValue);
       if (token.isNegative) innerValue *= -1;
       tokens[i] = new Token(innerValue.toString());
@@ -27,7 +27,7 @@ function solveParenthesis(tokens) {
 function solvePowers(tokens) {
   for (let i = tokens.length - 1; i >= 0; i--) {
     const token = tokens[i];
-    if (token.isOperator && token.priority === 3) {
+    if (token.type === Token.TYPES.OPERATOR && token.priority === 3) {
       const prev = tokens[i - 1],
         next = tokens[i + 1],
         value = token.perform(prev.value, next.value);
@@ -40,7 +40,7 @@ function solvePowers(tokens) {
 function solveOpsWithProriorityOf2(tokens) {
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
-    if (token.isOperator && token.priority === 2) {
+    if (token.type === Token.TYPES.OPERATOR && token.priority === 2) {
       const prev = tokens[i - 1],
         next = tokens[i + 1],
         value = token.perform(prev.value, next.value);
@@ -53,7 +53,7 @@ function solveOpsWithProriorityOf2(tokens) {
 function evalTokens(tokens) {
   if (!tokens.length) throw new Error('no tokens');
 
-  solveFunctions(tokens)
+  solveFunctions(tokens);
   solveParenthesis(tokens);
   solvePowers(tokens);
   solveOpsWithProriorityOf2(tokens);
@@ -62,7 +62,7 @@ function evalTokens(tokens) {
     operator,
     prev;
   for (const token of tokens) {
-    if (token.isOperator) {
+    if (token.type === Token.TYPES.OPERATOR) {
       prev = operator ? operator.perform(prev, next) : next;
       operator = token;
       next = undefined;
