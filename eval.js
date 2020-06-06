@@ -1,5 +1,16 @@
-const { Token, Parenthesis } = require('./tokens');
+const { Token, Parenthesis, MathFunction } = require('./tokens');
 const tokenize = require('./tokenize');
+
+function solveFunctions(tokens) {
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
+    if (token instanceof MathFunction) {
+      const argValue = evalExpression(token.arg.innerValue);
+      tokens[i] = new Token(token.calculate(argValue));
+			// console.log('TCL: solveFunctions -> argValue', argValue);
+    }
+  }
+}
 
 function solveParenthesis(tokens) {
   for (let i = 0; i < tokens.length; i++) {
@@ -42,6 +53,7 @@ function solveOpsWithProriorityOf2(tokens) {
 function evalTokens(tokens) {
   if (!tokens.length) throw new Error('no tokens');
 
+  solveFunctions(tokens)
   solveParenthesis(tokens);
   solvePowers(tokens);
   solveOpsWithProriorityOf2(tokens);

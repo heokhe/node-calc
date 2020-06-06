@@ -1,12 +1,13 @@
-const { Operator, Token, Parenthesis } = require('./tokens');
+const { Operator, Token, Parenthesis, MathFunction } = require('./tokens');
 
 /** @param {string} expr */
 module.exports = function tokenize(expr) {
-  /** @type {(Token | Operator)[]} */
+  /** @type {(Token | Operator | Parenthesis | MathFunction)[]} */
   const tokens = [];
   let x = '',
     neg = false,
     open = false,
+    f = '',
     n = 0;
   for (let i = 0; i < expr.length; i++) {
     const c = expr[i];
@@ -31,14 +32,20 @@ module.exports = function tokenize(expr) {
           tokens.push(new Operator('*'));
           x = '';
           neg = false;
-        }
+        } 
         continue;
       }
     } else if (c === ')') {
       n--;
       if (n === 0) {
         open = false;
-        tokens.push(new Parenthesis(`(${x})`, neg));
+        if (f) {
+          tokens.push(new MathFunction(f, new Parenthesis(`(${x})`), neg));
+          f = '';
+          // console.log(f, x)
+        } else {
+          tokens.push(new Parenthesis(`(${x})`, neg));
+        }
         x = '';
         if (/[0-9.]/.test(expr[i + 1])) tokens.push(new Operator('*'));
         continue;
@@ -50,9 +57,10 @@ module.exports = function tokenize(expr) {
       continue;
     }
 
-    if (/[0-9.]/.test(c)) x += c;
+    if (n === 0 && /[a-z]/.test(c)) f += c;
+    else if (/[0-9.]/.test(c)) x += c;
     else if ([...'^-+*/'].includes(c)) {
-      if (x || tokens[tokens.length - 1] instanceof Parenthesis) {
+      if (x || tokens[tokens.length - 1] instanceof Parenthesis || tokens[tokens.length - 1] instanceof MathFunction) {
         if (x) tokens.push(new Token(x, neg));
         tokens.push(new Operator(c));
         x = '';

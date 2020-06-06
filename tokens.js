@@ -1,4 +1,5 @@
 const ops = require('./operators');
+const fns = require('./functions');
 
 class Token {
   /** @param {string} string */
@@ -59,4 +60,19 @@ class Parenthesis extends Token {
   }
 }
 
-module.exports = { Token, Operator, Parenthesis };
+class MathFunction extends Token {
+  constructor(type, argument, isNegative) {
+    super('', isNegative);
+    this.arg = argument;
+    this.type = type;
+  }
+
+  calculate(v) {
+    const f = fns[this.type];
+    if (!f) throw new Error(`unknown function: ${this.type}`);
+    return (this.isNegative ? -1 : 1) * f(v);
+  }
+}
+
+// eslint-disable-next-line object-curly-newline
+module.exports = { Token, Operator, Parenthesis, MathFunction };
