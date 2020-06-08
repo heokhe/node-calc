@@ -1,3 +1,5 @@
 language: node_js
 node_js:
   - node
+env:
+  - COVERALLS_REPO_TOKEN=Gpp0mAa7sAk2xRBYUxYvN6nUcjjqXNrkp
