@@ -23,4 +23,6 @@ expectError('throws when an operator needs a left-hand side expression', () => t
 expectError('throws when an operator expected a right-hand side expression', () => tokenize('2 * '));
 expectError('throws when there\'s an unknown function', () => evalTokens(tokenize('foo(4)')));
 expectError('throws when a function is written with no braces', () => evalTokens(tokenize('sin45')));
+expectError('throws when a function is written with arguments', () => evalTokens(tokenize('sin()')));
+expectError('throws when only a function name is present', () => evalTokens(tokenize('2 + sin')));
 expectError('throws when parenthesis are not balanced', () => evalTokens(tokenize('(2+2')));
