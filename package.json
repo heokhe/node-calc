@@ -7,6 +7,9 @@
     "calculator",
     "cli"
   ],
+  "scripts": {
+    "test": "tap --100 --nyc-arg=\"--skip-full\""
+  },
   "bin": {
     "node-calc": "bin/cli.js"
   },
