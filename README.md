@@ -8,6 +8,7 @@ It supports +, -, *, / and ^ operators, parenthesis, and functions such as:
 - **Trigonometric functions**: sin, cos, tan, cot
 - sqrt, cbrt
 - **Factorial**: x! (or fact(x))
+- abs
 
 > Functions are written in the form of `f(x)`, `fx` syntax is not supported yet!
 
