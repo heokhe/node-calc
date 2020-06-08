@@ -2,13 +2,13 @@
   "name": "@hkh12/node-calc",
   "version": "4.0.0-beta.0",
   "description": "A small library/CLI to help you parse and calculate basic math expressions.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "keywords": [
     "calculator",
     "cli"
   ],
   "bin": {
-    "node-calc": "cli.js"
+    "node-calc": "bin/cli.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "chalk": "^3.0.0"
   },
   "devDependencies": {
-    "@hkh12/eslint-config": "^1.2.1"
+    "@hkh12/eslint-config": "^1.2.1",
+    "tap": "^14.10.7"
   }
 }
