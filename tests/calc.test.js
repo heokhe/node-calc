@@ -21,3 +21,8 @@ tap.equals(evalExpression('cot(30)'), 1 / Math.tan(30 * R));
 tap.equals(evalExpression('tan(30)'), Math.tan(30 * R));
 tap.equals(evalExpression('sqrt(4)'), 2);
 tap.equals(evalExpression('2cbrt(-8)'), -4);
+tap.equals(evalExpression('4!'), 4 * 3 * 2);
+tap.equals(evalExpression('(2+3)!'), 5 * 4 * 3 * 2);
+tap.equals(evalExpression('0!'), 1);
+tap.throws(() => evalExpression('2.5!'));
+tap.throws(() => evalExpression('fact(-1)'));

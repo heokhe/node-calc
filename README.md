@@ -5,8 +5,9 @@
 
 A small library/CLI to help you parse and calculate basic math expressions. 
 It supports +, -, *, / and ^ operators, parenthesis, and functions such as:
-- sin, cos, tan, cot
+- **Trigonometric functions**: sin, cos, tan, cot
 - sqrt, cbrt
+- **Factorial**: x! (or fact(x))
 
 > Functions are written in the form of `f(x)`, `fx` syntax is not supported yet!
 
