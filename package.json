@@ -4,6 +4,7 @@
   "description": "A small library/CLI to help you parse and calculate basic math expressions.",
   "main": "lib/index.js",
   "keywords": [
+    "math",
     "calculator",
     "cli"
   ],
