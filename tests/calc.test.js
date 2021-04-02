@@ -41,3 +41,8 @@ tap.equals(evalExpression('cos(270)'), 0);
 
 // trigonometric functions: tan & cot
 tap.equals(evalExpression('cot(4)'), 1 / evalExpression('tan(4)'));
+
+// logarithmic functions
+tap.equals(evalExpression('log(100)'), 2);
+tap.equals(evalExpression('ln(1)'), 0);
+tap.equals(evalExpression('log(64) / log(8)'), 2);
