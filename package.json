@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "@hkh12/eslint-config": "^1.2.1",
-    "tap": "^14.10.7"
+    "tap": "^15.0.1"
   }
 }
