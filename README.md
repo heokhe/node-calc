@@ -9,6 +9,7 @@ It supports +, -, *, / and ^ operators, parenthesis, and functions such as:
 - sqrt, cbrt
 - **Factorial**: x! (or fact(x))
 - abs
+- log (base 10), ln
 
 > Functions are written in the form of `f(x)`, `fx` syntax is not supported yet!
 
