@@ -9,4 +9,4 @@ tap.equal(tokenize('-(2) * -sqrt(4)').join(''), '-(2)*-sqrt(4)');
 
 // because ! is an unknown operator
 // eslint-disable-next-line no-restricted-globals
-tap.equal(isNaN(new Operator('!').perform(2, 1)), true);
+tap.throws(() => new Operator('!').perform(2, 1));

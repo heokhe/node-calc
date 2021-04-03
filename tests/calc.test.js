@@ -5,6 +5,7 @@ const { evalExpression } = require('../lib');
 tap.equals(evalExpression(' 2 * 2'), 4);
 tap.equals(evalExpression('1 + 2 + 3 + 4'), 10);
 tap.equals(evalExpression('2 / 2'), 1);
+tap.throws(() => evalExpression('2 / 0'));
 
 // parenthesis
 tap.equals(evalExpression('2(5 + 2)3'), 2 * 7 * 3);
