@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.org/hkh12/node-calc.svg?branch=master)](https://travis-ci.org/hkh12/node-calc)
 [![Coverage Status](https://coveralls.io/repos/github/hkh12/node-calc/badge.svg?branch=master)](https://coveralls.io/github/hkh12/node-calc?branch=master)
+[![Minzipped size](https://badgen.net/bundlephobia/minzip/@hkh12/node-calc)](https://badgen.net/bundlephobia/minzip/@hkh12/node-calc)
 
-A small library/CLI to help you parse and calculate basic math expressions. 
+A small, fast, zero-dependency library/CLI to help you parse and calculate basic math expressions. 
 It supports +, -, *, / and ^ operators, parenthesis, and functions such as:
 - **Trigonometric functions**: sin, cos, tan, cot
 - sqrt, cbrt
